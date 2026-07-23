@@ -4,3 +4,12 @@ GET {{Nexora.Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+POST https://localhost:7007/api/auth/register
+Content-Type: application/json
+
+{
+  "nombre": "Baruc Rangel",
+  "email": "baruc@nexora.com",
+  "password": "123456"
+}
