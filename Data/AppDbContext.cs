@@ -20,6 +20,7 @@ public class AppDbContext : DbContext
     public DbSet<Pedido> Pedidos => Set<Pedido>();
     public DbSet<DetallePedido> DetallesPedido => Set<DetallePedido>();
     public DbSet<PreguntaFrecuente> PreguntasFrecuentes => Set<PreguntaFrecuente>();
+    public DbSet<SolicitudCliente> SolicitudesCliente => Set<SolicitudCliente>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -37,6 +38,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Pedido>().HasKey(e => e.IdPedido);
         modelBuilder.Entity<DetallePedido>().HasKey(e => e.IdDetallePedido);
         modelBuilder.Entity<PreguntaFrecuente>().HasKey(e => e.IdFaq);
+        modelBuilder.Entity<SolicitudCliente>().HasKey(e => e.IdSolicitud);
 
         // --- Precisión decimal explícita ---
         modelBuilder.Entity<Producto>()

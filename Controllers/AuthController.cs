@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Nexora.Api.Data;
 using Nexora.Api.DTOs;
@@ -21,6 +22,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
+    [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<AuthResponseDto>> Register(RegisterDto dto)
     {
         var existe = await _context.Usuarios.AnyAsync(u => u.Email == dto.Email);
@@ -32,7 +34,7 @@ public class AuthController : ControllerBase
             Nombre = dto.Nombre,
             Email = dto.Email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-            Rol = "Cliente" // el registro público siempre crea Clientes; Administradores se crean aparte
+            Rol = string.IsNullOrEmpty(dto.Rol) ? "Cliente" : dto.Rol
         };
 
         _context.Usuarios.Add(usuario);

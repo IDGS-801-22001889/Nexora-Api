@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nexora.Api.Data;
 
@@ -11,9 +12,11 @@ using Nexora.Api.Data;
 namespace Nexora.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260726211539_AgregaSolicitudCliente")]
+    partial class AgregaSolicitudCliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -450,9 +453,6 @@ namespace Nexora.Api.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"));
 
                     b.Property<bool>("Activo")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("CorreoEnviado")
                         .HasColumnType("bit");
 
                     b.Property<string>("Email")

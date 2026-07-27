@@ -35,6 +35,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<EmailService>();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();

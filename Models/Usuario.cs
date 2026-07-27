@@ -9,4 +9,5 @@ public class Usuario
     public string Rol { get; set; } = "Cliente"; // "Administrador" | "Cliente"
     public bool Activo { get; set; } = true;
     public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
+    public bool CorreoEnviado { get; set; } = false;
 }
