@@ -75,6 +75,63 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<DetallePedido>()
             .Property(d => d.PrecioUnitario).HasColumnType("decimal(10,2)");
 
+        // --- Relaciones explícitas (evita columnas FK duplicadas/fantasma) ---
+        modelBuilder.Entity<Compra>()
+            .HasOne(c => c.Proveedor)
+            .WithMany()
+            .HasForeignKey(c => c.IdProveedor);
+
+        modelBuilder.Entity<DetalleCompra>()
+            .HasOne(d => d.Compra)
+            .WithMany(c => c.Detalles)
+            .HasForeignKey(d => d.IdCompra);
+
+        modelBuilder.Entity<DetalleCompra>()
+            .HasOne(d => d.MateriaPrima)
+            .WithMany()
+            .HasForeignKey(d => d.IdMateriaPrima);
+
+        modelBuilder.Entity<Receta>()
+            .HasOne(r => r.Producto)
+            .WithMany()
+            .HasForeignKey(r => r.IdProducto);
+
+        modelBuilder.Entity<Receta>()
+            .HasOne(r => r.MateriaPrima)
+            .WithMany()
+            .HasForeignKey(r => r.IdMateriaPrima);
+
+        modelBuilder.Entity<Cotizacion>()
+            .HasOne(c => c.Usuario)
+            .WithMany()
+            .HasForeignKey(c => c.IdUsuario)
+            .IsRequired(false);
+
+        modelBuilder.Entity<DetalleCotizacion>()
+            .HasOne(d => d.Cotizacion)
+            .WithMany(c => c.Detalles)
+            .HasForeignKey(d => d.IdCotizacion);
+
+        modelBuilder.Entity<DetalleCotizacion>()
+            .HasOne(d => d.Producto)
+            .WithMany()
+            .HasForeignKey(d => d.IdProducto);
+
+        modelBuilder.Entity<Pedido>()
+            .HasOne(p => p.Usuario)
+            .WithMany()
+            .HasForeignKey(p => p.IdUsuario);
+
+        modelBuilder.Entity<DetallePedido>()
+            .HasOne(d => d.Pedido)
+            .WithMany(p => p.Detalles)
+            .HasForeignKey(d => d.IdPedido);
+
+        modelBuilder.Entity<DetallePedido>()
+            .HasOne(d => d.Producto)
+            .WithMany()
+            .HasForeignKey(d => d.IdProducto);
+
         base.OnModelCreating(modelBuilder);
     }
 }
