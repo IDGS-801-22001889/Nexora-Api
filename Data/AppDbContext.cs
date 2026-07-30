@@ -16,7 +16,6 @@ public class AppDbContext : DbContext
     public DbSet<Receta> Recetas => Set<Receta>();
     public DbSet<Comentario> Comentarios => Set<Comentario>();
     public DbSet<Cotizacion> Cotizaciones => Set<Cotizacion>();
-    public DbSet<DetalleCotizacion> DetallesCotizacion => Set<DetalleCotizacion>();
     public DbSet<Pedido> Pedidos => Set<Pedido>();
     public DbSet<DetallePedido> DetallesPedido => Set<DetallePedido>();
     public DbSet<PreguntaFrecuente> PreguntasFrecuentes => Set<PreguntaFrecuente>();
@@ -35,7 +34,6 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Receta>().HasKey(e => e.IdReceta);
         modelBuilder.Entity<Comentario>().HasKey(e => e.IdComentario);
         modelBuilder.Entity<Cotizacion>().HasKey(e => e.IdCotizacion);
-        modelBuilder.Entity<DetalleCotizacion>().HasKey(e => e.IdDetalleCotizacion);
         modelBuilder.Entity<Pedido>().HasKey(e => e.IdPedido);
         modelBuilder.Entity<DetallePedido>().HasKey(e => e.IdDetallePedido);
         modelBuilder.Entity<PreguntaFrecuente>().HasKey(e => e.IdFaq);
@@ -63,10 +61,12 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Cotizacion>()
             .Property(c => c.Total).HasColumnType("decimal(10,2)");
-        modelBuilder.Entity<DetalleCotizacion>()
-            .Property(d => d.Cantidad).HasColumnType("decimal(10,2)");
-        modelBuilder.Entity<DetalleCotizacion>()
-            .Property(d => d.PrecioCalculado).HasColumnType("decimal(10,2)");
+        modelBuilder.Entity<Cotizacion>()
+            .Property(c => c.CostoUnitario).HasColumnType("decimal(10,2)");
+        modelBuilder.Entity<Cotizacion>()
+            .Property(c => c.Subtotal).HasColumnType("decimal(10,2)");
+        modelBuilder.Entity<Cotizacion>()
+            .Property(c => c.Iva).HasColumnType("decimal(10,2)");
 
         modelBuilder.Entity<Pedido>()
             .Property(p => p.Total).HasColumnType("decimal(10,2)");
@@ -106,16 +106,6 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(c => c.IdUsuario)
             .IsRequired(false);
-
-        modelBuilder.Entity<DetalleCotizacion>()
-            .HasOne(d => d.Cotizacion)
-            .WithMany(c => c.Detalles)
-            .HasForeignKey(d => d.IdCotizacion);
-
-        modelBuilder.Entity<DetalleCotizacion>()
-            .HasOne(d => d.Producto)
-            .WithMany()
-            .HasForeignKey(d => d.IdProducto);
 
         modelBuilder.Entity<Pedido>()
             .HasOne(p => p.Usuario)

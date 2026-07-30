@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nexora.Api.Data;
 
@@ -11,9 +12,11 @@ using Nexora.Api.Data;
 namespace Nexora.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260730001748_AgregaPorcentajeEnsamblaje")]
+    partial class AgregaPorcentajeEnsamblaje
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,17 +100,7 @@ namespace Nexora.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCotizacion"));
 
-                    b.Property<bool>("Capacitacion")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("CiudadRegion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("CostoUnitario")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<string>("Email")
+                    b.Property<string>("EmailContacto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -117,31 +110,7 @@ namespace Nexora.Api.Migrations
                     b.Property<int?>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.Property<bool>("InstalacionIncluida")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("Iva")
-                        .HasColumnType("decimal(10,2)");
-
                     b.Property<string>("NombreContacto")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreEmpresa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumeroUnidades")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Subtotal")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TipoTransporte")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -182,6 +151,35 @@ namespace Nexora.Api.Migrations
                     b.HasIndex("IdMateriaPrima");
 
                     b.ToTable("DetallesCompra");
+                });
+
+            modelBuilder.Entity("Nexora.Api.Models.DetalleCotizacion", b =>
+                {
+                    b.Property<int>("IdDetalleCotizacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdDetalleCotizacion"));
+
+                    b.Property<decimal>("Cantidad")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<int>("IdCotizacion")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdProducto")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PrecioCalculado")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.HasKey("IdDetalleCotizacion");
+
+                    b.HasIndex("IdCotizacion");
+
+                    b.HasIndex("IdProducto");
+
+                    b.ToTable("DetallesCotizacion");
                 });
 
             modelBuilder.Entity("Nexora.Api.Models.DetallePedido", b =>
@@ -543,6 +541,25 @@ namespace Nexora.Api.Migrations
                     b.Navigation("MateriaPrima");
                 });
 
+            modelBuilder.Entity("Nexora.Api.Models.DetalleCotizacion", b =>
+                {
+                    b.HasOne("Nexora.Api.Models.Cotizacion", "Cotizacion")
+                        .WithMany("Detalles")
+                        .HasForeignKey("IdCotizacion")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Nexora.Api.Models.Producto", "Producto")
+                        .WithMany()
+                        .HasForeignKey("IdProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cotizacion");
+
+                    b.Navigation("Producto");
+                });
+
             modelBuilder.Entity("Nexora.Api.Models.DetallePedido", b =>
                 {
                     b.HasOne("Nexora.Api.Models.Pedido", "Pedido")
@@ -593,6 +610,11 @@ namespace Nexora.Api.Migrations
                 });
 
             modelBuilder.Entity("Nexora.Api.Models.Compra", b =>
+                {
+                    b.Navigation("Detalles");
+                });
+
+            modelBuilder.Entity("Nexora.Api.Models.Cotizacion", b =>
                 {
                     b.Navigation("Detalles");
                 });

@@ -42,7 +42,8 @@ public class ProductoController : ControllerBase
             Nombre = dto.Nombre,
             Descripcion = dto.Descripcion,
             Precio = dto.Precio,
-            Imagen = dto.Imagen
+            Imagen = dto.Imagen,
+            PorcentajeEnsamblaje = dto.PorcentajeEnsamblaje
         };
 
         _context.Productos.Add(producto);
@@ -63,6 +64,7 @@ public class ProductoController : ControllerBase
         producto.Descripcion = dto.Descripcion;
         producto.Precio = dto.Precio;
         producto.Imagen = dto.Imagen;
+        producto.PorcentajeEnsamblaje = dto.PorcentajeEnsamblaje;
 
         await _context.SaveChangesAsync();
         return NoContent();
