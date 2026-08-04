@@ -8,4 +8,5 @@ public class Producto
     public decimal Precio { get; set; }
     public string? Imagen { get; set; }
     public decimal PorcentajeEnsamblaje { get; set; } = 15;
+    public int Stock { get; set; } = 0;
 }
