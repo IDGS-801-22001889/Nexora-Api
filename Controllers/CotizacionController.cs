@@ -109,4 +109,19 @@ public class CotizacionController : ControllerBase
 
         return Ok(cotizaciones);
     }
+
+    // GET api/cotizacion/mis-cotizaciones -> solo del cliente logueado, y que aún no se hayan usado
+    [HttpGet("mis-cotizaciones")]
+    [Authorize(Roles = "Cliente")]
+    public async Task<IActionResult> GetMisCotizaciones()
+    {
+        var idUsuario = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+        var cotizaciones = await _context.Cotizaciones
+            .Where(c => c.IdUsuario == idUsuario && c.Estado == "Nueva")
+            .OrderByDescending(c => c.Fecha)
+            .ToListAsync();
+
+        return Ok(cotizaciones);
+    }
 }

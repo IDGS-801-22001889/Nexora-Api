@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nexora.Api.Data;
 
@@ -11,9 +12,11 @@ using Nexora.Api.Data;
 namespace Nexora.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260804035814_SimplificaPedido")]
+    partial class SimplificaPedido
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,10 +111,6 @@ namespace Nexora.Api.Migrations
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Estado")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -268,9 +267,6 @@ namespace Nexora.Api.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdCotizacion")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
@@ -285,8 +281,6 @@ namespace Nexora.Api.Migrations
                         .HasColumnType("decimal(10,2)");
 
                     b.HasKey("IdPedido");
-
-                    b.HasIndex("IdCotizacion");
 
                     b.HasIndex("IdUsuario");
 
@@ -337,7 +331,7 @@ namespace Nexora.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("PorcentajeEnsamblaje")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(10,2)");
@@ -538,19 +532,11 @@ namespace Nexora.Api.Migrations
 
             modelBuilder.Entity("Nexora.Api.Models.Pedido", b =>
                 {
-                    b.HasOne("Nexora.Api.Models.Cotizacion", "Cotizacion")
-                        .WithMany()
-                        .HasForeignKey("IdCotizacion")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Nexora.Api.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Cotizacion");
 
                     b.Navigation("Usuario");
                 });

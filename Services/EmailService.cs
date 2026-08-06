@@ -37,4 +37,34 @@ public class EmailService
 
         cliente.Send(mensaje);
     }
+
+    public void EnviarMensajeContacto(string nombre, string email, string telefono, string asunto, string mensaje)
+    {
+        var mensajeCorreo = new MailMessage
+        {
+            From = new MailAddress(_config["Email:From"]!, "Formulario de Contacto - NEXORA"),
+            Subject = $"[Contacto] {asunto}",
+            IsBodyHtml = true,
+            Body = $@"
+            <p><b>Nuevo mensaje desde el formulario de contacto:</b></p>
+            <p><b>Nombre:</b> {nombre}<br/>
+            <b>Correo:</b> {email}<br/>
+            <b>Teléfono:</b> {telefono}<br/>
+            <b>Asunto:</b> {asunto}</p>
+            <p><b>Mensaje:</b><br/>{mensaje}</p>
+        "
+        };
+
+        // Se envía A la misma cuenta configurada como remitente
+        mensajeCorreo.To.Add(_config["Email:From"]!);
+        mensajeCorreo.ReplyToList.Add(new MailAddress(email)); // para que puedas responder directo al cliente
+
+        using var cliente = new SmtpClient(_config["Email:SmtpHost"], int.Parse(_config["Email:SmtpPort"]!))
+        {
+            Credentials = new NetworkCredential(_config["Email:From"], _config["Email:Password"]),
+            EnableSsl = true
+        };
+
+        cliente.Send(mensajeCorreo);
+    }
 }

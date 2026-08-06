@@ -17,7 +17,6 @@ public class AppDbContext : DbContext
     public DbSet<Comentario> Comentarios => Set<Comentario>();
     public DbSet<Cotizacion> Cotizaciones => Set<Cotizacion>();
     public DbSet<Pedido> Pedidos => Set<Pedido>();
-    public DbSet<DetallePedido> DetallesPedido => Set<DetallePedido>();
     public DbSet<PreguntaFrecuente> PreguntasFrecuentes => Set<PreguntaFrecuente>();
     public DbSet<SolicitudCliente> SolicitudesCliente => Set<SolicitudCliente>();
     public DbSet<Documentacion> Documentaciones => Set<Documentacion>();
@@ -35,7 +34,6 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Comentario>().HasKey(e => e.IdComentario);
         modelBuilder.Entity<Cotizacion>().HasKey(e => e.IdCotizacion);
         modelBuilder.Entity<Pedido>().HasKey(e => e.IdPedido);
-        modelBuilder.Entity<DetallePedido>().HasKey(e => e.IdDetallePedido);
         modelBuilder.Entity<PreguntaFrecuente>().HasKey(e => e.IdFaq);
         modelBuilder.Entity<SolicitudCliente>().HasKey(e => e.IdSolicitud);
         modelBuilder.Entity<Documentacion>().HasKey(e => e.IdDocumento);
@@ -70,10 +68,6 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Pedido>()
             .Property(p => p.Total).HasColumnType("decimal(10,2)");
-        modelBuilder.Entity<DetallePedido>()
-            .Property(d => d.Cantidad).HasColumnType("decimal(10,2)");
-        modelBuilder.Entity<DetallePedido>()
-            .Property(d => d.PrecioUnitario).HasColumnType("decimal(10,2)");
 
         // --- Relaciones explícitas (evita columnas FK duplicadas/fantasma) ---
         modelBuilder.Entity<Compra>()
@@ -112,15 +106,13 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(p => p.IdUsuario);
 
-        modelBuilder.Entity<DetallePedido>()
-            .HasOne(d => d.Pedido)
-            .WithMany(p => p.Detalles)
-            .HasForeignKey(d => d.IdPedido);
-
-        modelBuilder.Entity<DetallePedido>()
-            .HasOne(d => d.Producto)
+        modelBuilder.Entity<Pedido>()
+            .HasOne(p => p.Cotizacion)
             .WithMany()
-            .HasForeignKey(d => d.IdProducto);
+            .HasForeignKey(p => p.IdCotizacion);
+
+        modelBuilder.Entity<Producto>()
+            .Property(p => p.PorcentajeEnsamblaje).HasColumnType("decimal(5,2)");
 
         base.OnModelCreating(modelBuilder);
     }

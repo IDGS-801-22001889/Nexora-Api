@@ -69,7 +69,7 @@ public class ComentarioController : ControllerBase
             IdUsuario = IdUsuarioActual,
             Texto = dto.Texto,
             Calificacion = dto.Calificacion,
-            Estado = "Pendiente" // requiere moderación del admin antes de publicarse
+            Estado = "Revisado" // publicación automática, sin moderación previa
         };
 
         _context.Comentarios.Add(comentario);
@@ -112,6 +112,44 @@ public class ComentarioController : ControllerBase
         if (comentario is null) return NotFound();
 
         comentario.Estado = estado; // "Revisado" | "Pendiente" | "Rechazado"
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    // GET api/comentario/destacados -> los 3 más recientes, para mostrar en Home
+    [HttpGet("destacados")]
+    public async Task<IActionResult> GetDestacados()
+    {
+        var comentarios = await _context.Comentarios
+            .Where(c => c.Estado == "Revisado")
+            .OrderByDescending(c => c.Fecha)
+            .Take(3)
+            .Join(_context.Usuarios,
+                c => c.IdUsuario,
+                u => u.IdUsuario,
+                (c, u) => new
+                {
+                    c.IdComentario,
+                    c.Texto,
+                    c.Calificacion,
+                    c.Fecha,
+                    NombreCliente = u.Nombre
+                })
+            .ToListAsync();
+
+        return Ok(comentarios);
+    }
+
+    // DELETE api/comentario/5 -> solo Administrador, elimina un comentario inapropiado
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrador")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var comentario = await _context.Comentarios.FindAsync(id);
+        if (comentario is null) return NotFound();
+
+        _context.Comentarios.Remove(comentario);
         await _context.SaveChangesAsync();
 
         return NoContent();

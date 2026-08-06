@@ -10,8 +10,8 @@ Content-Type: application/json
 
 {
   "nombre": "Baruc Rangel",
-  "email": "baruc@nexora.com",
-  "password": "123456"
+  "email": "admin@nexora.com",
+  "password": "$AdminTotal2026"
 }
 
 ###
@@ -28,13 +28,26 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hc
 
 ###
 
-POST https://localhost:7007/api/producto
+PUT https://localhost:7007/api/producto/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQmFydWMgSXNzYWMgUmFuZ2VsIE1pcmVsZXMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJiYXJ1Y0BuZXhvcmEuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYWRvciIsImV4cCI6MTc4NTIyNjcwNn0.y0zW8KE6wyN7uQy_ONxIV_cq67KxTrxXOQR9H87PNV8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQmFydWMgUmFuZ2VsIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5AbmV4b3JhLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmFkb3IiLCJleHAiOjE3ODU5MzAwODJ9.Cdb46PSDJ275OiA5jt_wWz6lw_-Fden2eaaUqpXgbSM
 
 {
   "nombre": "SOMNIX",
   "descripcion": "Sistema integral de prevención de fatiga laboral para conductores de transporte de carga y pasajeros.",
   "precio": 2500.00,
-  "imagen": ""
+  "imagen": "/img/GORRA1.png",
+  "porcentajeEnsamblaje": 15
+}
+
+###
+### Crear primer administrador
+POST https://localhost:7007/api/auth/register
+Content-Type: application/json
+
+{
+  "nombre": "Baruc Rangel",
+  "email": "admin@nexora.com",
+  "password": "$AdminTotal2026",
+  "rol": "Administrador"
 }

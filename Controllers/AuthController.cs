@@ -25,6 +25,9 @@ public class AuthController : ControllerBase
     [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<AuthResponseDto>> Register(RegisterDto dto)
     {
+        if (!PasswordValidator.EsValida(dto.Password))
+            return BadRequest(PasswordValidator.MensajeError);
+
         var existe = await _context.Usuarios.AnyAsync(u => u.Email == dto.Email);
         if (existe)
             return BadRequest("Ya existe un usuario con ese correo.");

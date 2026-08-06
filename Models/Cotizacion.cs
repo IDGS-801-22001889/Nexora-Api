@@ -13,16 +13,17 @@ public class Cotizacion
     public string Telefono { get; set; } = null!;
 
     public int NumeroUnidades { get; set; }
-    public string TipoTransporte { get; set; } = null!; // "Carga" | "Pasajeros"
+    public string TipoTransporte { get; set; } = null!;
     public string CiudadRegion { get; set; } = null!;
 
     public bool InstalacionIncluida { get; set; }
     public bool Capacitacion { get; set; }
 
-    public decimal CostoUnitario { get; set; } // snapshot del costo al momento de cotizar
+    public decimal CostoUnitario { get; set; }
     public decimal Subtotal { get; set; }
     public decimal Iva { get; set; }
     public decimal Total { get; set; }
 
     public DateTime Fecha { get; set; } = DateTime.UtcNow;
+    public string Estado { get; set; } = "Nueva";
 }

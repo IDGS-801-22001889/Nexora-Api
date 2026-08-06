@@ -70,6 +70,9 @@ public class UsuariosController : ControllerBase
         if (!BCrypt.Net.BCrypt.Verify(dto.PasswordActual, usuario.PasswordHash))
             return BadRequest("La contraseña actual no es correcta.");
 
+        if (!PasswordValidator.EsValida(dto.PasswordNueva))
+            return BadRequest(PasswordValidator.MensajeError);
+
         usuario.PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.PasswordNueva);
         await _context.SaveChangesAsync();
 
