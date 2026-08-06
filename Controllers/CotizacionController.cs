@@ -30,8 +30,8 @@ public class CotizacionController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(CotizacionDto dto)
     {
-        if (dto.NumeroUnidades <= 0)
-            return BadRequest("El número de unidades debe ser mayor a 0.");
+        if (dto.NumeroUnidades <= 0 || dto.NumeroUnidades > 30)
+            return BadRequest("El número de unidades debe ser entre 1 y 30 unidades por cotización.");
 
         var producto = await _context.Productos.FirstOrDefaultAsync();
         if (producto is null) return BadRequest("No hay producto configurado.");

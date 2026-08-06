@@ -16,21 +16,9 @@ Content-Type: application/json
 
 ###
 
-POST https://localhost:7007/api/faq
+POST https://localhost:7007/api/producto
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQmFydWMgUmFuZ2VsIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYmFydWNAbmV4b3JhLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmFkb3IiLCJleHAiOjE3ODUxMjE5OTh9.oEzd0wSJgZlfCAkHnoOEYKKkR0ETfrOkYXYAQz0nPhQ
-
-{
-  "pregunta": "¿Cómo funciona el sistema de monitoreo?",
-  "respuesta": "El sistema utiliza sensores IoT conectados vía Wi-Fi que envían datos en tiempo real a través de un broker MQTT.",
-  "orden": 1
-}
-
-###
-
-PUT https://localhost:7007/api/producto/1
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQmFydWMgUmFuZ2VsIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5AbmV4b3JhLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmFkb3IiLCJleHAiOjE3ODU5MzAwODJ9.Cdb46PSDJ275OiA5jt_wWz6lw_-Fden2eaaUqpXgbSM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQmFydWMgUmFuZ2VsIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5AbmV4b3JhLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmFkb3IiLCJleHAiOjE3ODYwMDE2Njh9.tvIKDaDio-y2lVu9HyU5LXF4UWuwh1dKYF_C2Qib5kQ
 
 {
   "nombre": "SOMNIX",
@@ -50,4 +38,64 @@ Content-Type: application/json
   "email": "admin@nexora.com",
   "password": "$AdminTotal2026",
   "rol": "Administrador"
+}
+
+###
+
+POST https://localhost:7007/api/faq
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQmFydWMgUmFuZ2VsIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5AbmV4b3JhLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmFkb3IiLCJleHAiOjE3ODYwMDE2Njh9.tvIKDaDio-y2lVu9HyU5LXF4UWuwh1dKYF_C2Qib5kQ
+
+{
+  "pregunta": "¿Cómo funciona el sensor de detección de fatiga?",
+  "respuesta": "El sensor MPU6050 monitorea el ángulo de cabeceo del conductor en tiempo real. Cuando detecta un patrón asociado a somnolencia, activa una alerta con buzzer y vibración en menos de 1 segundo, y notifica al panel de monitoreo de la flotilla.",
+  "orden": 1
+}
+
+###
+
+POST https://localhost:7007/api/faq
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQmFydWMgUmFuZ2VsIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5AbmV4b3JhLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmFkb3IiLCJleHAiOjE3ODYwMDE2Njh9.tvIKDaDio-y2lVu9HyU5LXF4UWuwh1dKYF_C2Qib5kQ
+
+{
+  "pregunta": "¿De qué material está hecha la gorra SOMNIX?",
+  "respuesta": "La estructura está fabricada con fibra de bambú tejida, un material renovable y de bajo impacto ambiental, que además es ligero y resistente para uso prolongado durante los turnos de manejo.",
+  "orden": 2
+}
+
+###
+
+POST https://localhost:7007/api/faq
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQmFydWMgUmFuZ2VsIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5AbmV4b3JhLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmFkb3IiLCJleHAiOjE3ODYwMDE2Njh9.tvIKDaDio-y2lVu9HyU5LXF4UWuwh1dKYF_C2Qib5kQ
+
+{
+  "pregunta": "¿Cómo obtengo una cotización para mi flotilla?",
+  "respuesta": "Desde la sección Cotizar puedes generar una cotización al instante, indicando el número de unidades, tipo de transporte y si deseas instalación o capacitación incluida. El costo se calcula con base en los materiales reales que componen el producto.",
+  "orden": 3
+}
+
+###
+
+POST https://localhost:7007/api/faq
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQmFydWMgUmFuZ2VsIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5AbmV4b3JhLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmFkb3IiLCJleHAiOjE3ODYwMDE2Njh9.tvIKDaDio-y2lVu9HyU5LXF4UWuwh1dKYF_C2Qib5kQ
+
+{
+  "pregunta": "¿Cómo puedo comprar SOMNIX después de cotizar?",
+  "respuesta": "Una vez que generes tu cotización, puedes convertirla directamente en una compra desde el botón Comprar con esta cotización. Tu pedido quedará en espera de confirmación por parte de un administrador, quien validará la disponibilidad de inventario.",
+  "orden": 4
+}
+
+###
+
+POST https://localhost:7007/api/faq
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQmFydWMgUmFuZ2VsIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5AbmV4b3JhLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluaXN0cmFkb3IiLCJleHAiOjE3ODYwMDE2Njh9.tvIKDaDio-y2lVu9HyU5LXF4UWuwh1dKYF_C2Qib5kQ
+
+{
+  "pregunta": "¿Cómo accedo a mi cuenta como cliente?",
+  "respuesta": "Los accesos de cliente son creados exclusivamente por un administrador de NEXORA. Si aún no tienes cuenta, puedes solicitar tus accesos desde la pantalla de inicio de sesión, y recibirás tus credenciales por correo electrónico.",
+  "orden": 5
 }
